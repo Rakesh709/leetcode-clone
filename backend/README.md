@@ -24,3 +24,9 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
      - npx prisma migrate dev
              name : usermodel
      - npx prisma db push
+
+## authantication started
+   - src -> routes->auth.routes.js
+      # constroller started 
+        - src->controllers-> auth.controller.js 
+           - npm i bcryptjs
