@@ -144,10 +144,15 @@ export const check = async ( req, res)=>{
     try {
         res.status(200).json({
           success:true,
-          message: "User authanticated successfully"
+          message: "User authanticated successfully",
+          user: req.user
         })
         
     } catch (error) {
+        console.log("Error checking user", user);
+        res.status(500).json({
+            error:"Error checking user"
+        })
         
     }
 }

@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken"
 import {db} from "../libs/db.js"
 
 export const authMiddleware = async (req, res, next)=>{
@@ -13,7 +13,7 @@ export const authMiddleware = async (req, res, next)=>{
 
         let decoded;
         try {
-            decoded = jwt.verify(token,process.env.JWT_SECRETE)
+            decoded = jwt.verify(token , process.env.JWT_SECRET);
         } catch (error) {
             return res.status(401).json({
                 message:"Unauthorized Invalid token"
