@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs"
 import {db} from "../libs/db.js"
 import { json } from "express";
+import { UserRole } from "../generated/prisma/index.js";
+import jwt from "jsonwebtoken"
+
 
 export const register = async ( req, res) =>{
     const {name, email, password} = req.body;
@@ -11,15 +14,52 @@ export const register = async ( req, res) =>{
                 email
             }
         })
-        if(!existingUser){
-            return res.status(400, json({
-               error: "User alredy exists" 
-            }))
+        if(existingUser){
+            return res.status(400).json({
+                    error:"User already exists"
+            })
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = await db.user.create({
+            data:{
+                email,
+                password: hashedPassword,
+                name,
+                role: UserRole.USER
+            }
+        })
+
+        const token = jwt.sign({id:newUser.id}, process.env.JWT_SECRET,{
+            expiresIn:"7d"
+        })
+
+        res.cookie("jwt",token,{
+            httpOnly:true,
+            sameSite:"strict",
+            secure:process.env.NODE_ENV !=="production",
+            maxAge:1000*60*60*24*7 //days
+
+        })
+
+        res.status(201).json({
+            message:"user created successfully",
+            user:{
+                id:newUser.id,
+                email:newUser.email,
+                name:newUser.name,
+                role:newUser.role,
+                image:newUser.image
+            }
+        })
+
+
     } catch (error) {
-        
+        console.error("Error creating user:", error)
+        res.status(500).json({
+            error:"Error creting user"
+        })
     }
 
 }

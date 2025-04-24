@@ -1,6 +1,8 @@
 import express from "express"
 import dotenv from 'dotenv';
+import cookieParser from "cookie-parser"
 import authRoutes from "./routes/auth.routes.js";
+
 
 dotenv.config(
     {
@@ -11,6 +13,7 @@ dotenv.config(
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req,res)=>{
     res.send("Hello guys welcome to leetlab🔥")
@@ -18,7 +21,7 @@ app.get("/", (req,res)=>{
 
 app.use("/api/v1/auth", authRoutes)
 
-const port = 3003 || process.env.PORT
+const port = 8080 || process.env.PORT
 
 app.listen(port, ()=>{
     console.log(`server is running ${port}`);
