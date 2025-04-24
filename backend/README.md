@@ -34,3 +34,6 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
            $ opnessl rand -hex 32
          - src-index.js
            [ cookies relates task]
+
+## middleware started
+   - src-> middleware -> auth.middleware.js
