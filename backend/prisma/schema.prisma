@@ -17,9 +17,40 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   password  String
+
+  problems Problem[]
 }
 
 enum UserRole {
   ADMIN
   USER
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Problem {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  difficulty  Difficulty
+  tags        String[] //["tags1","tags2"]
+  userId      String
+  example     Json
+  constraints String
+  hints       String?
+  editorial   String?
+
+  testCases          Json //{{"input":"1","output":"1"}}
+  codeSnippets       Json
+  referenceSolutions Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relationship
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
