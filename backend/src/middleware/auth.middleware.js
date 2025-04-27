@@ -49,3 +49,11 @@ export const authMiddleware = async (req, res, next)=>{
         
     }
 }
+
+export const checkAdmin = async(req, res,next)=>{
+    try {
+        const userId = req.user.id; 
+    } catch (error) {
+        
+    }
+}
