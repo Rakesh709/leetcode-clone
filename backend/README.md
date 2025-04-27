@@ -40,6 +40,14 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
 
 ##Problem created model 
   - schema.prisma
+
+## setup the jusdge0 
+
+## Pronlem Routes 
+  - src-> index.js
+     app.use("/api/v1/problems",problemRoutes)
+  - src->routes->problems.routes.js
+
      
 
 
@@ -56,31 +64,31 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
 Examples
 
       Set up a new Prisma project
-      $ prisma init
+      $ npx prisma init
 
       Generate artifacts (e.g. Prisma Client)   
-      $ prisma generate
+      $ npx prisma generate
 
       Browse your data
-      $ prisma studio
+      $ npx prisma studio
 
       Create migrations from your Prisma schema, apply them to the database, generate artifacts (e.g. Prisma Client)
-      $ prisma migrate dev
+      $ npx prisma migrate dev
 
       Pull the schema from an existing database, updating the Prisma schema
-      $ prisma db pull
+      $ npx prisma db pull
 
       Push the Prisma schema state to the database
-      $ prisma db push
+      $npx prisma db push
 
       Validate your Prisma schema
-      $ prisma validate
+      $ npx prisma validate
 
       Format your Prisma schema
-      $ prisma format
+      $ npx prisma format
 
       Display Prisma version info
-      $ prisma version
+      $ npx prisma version
 
       Display Prisma debug info
-      $ prisma debug
+      $ npx prisma debug
