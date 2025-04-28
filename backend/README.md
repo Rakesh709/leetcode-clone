@@ -43,10 +43,13 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
 
 ## setup the jusdge0 
 
-## Pronlem Routes 
+## Problem Routes 
   - src-> index.js
      app.use("/api/v1/problems",problemRoutes)
   - src->routes->problems.routes.js
+         checkAdmin : created
+         controller
+           - src-> controllers-> problem.controller.js
 
      
 

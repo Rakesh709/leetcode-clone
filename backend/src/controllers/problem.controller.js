@@ -1,6 +1,11 @@
 import express from "express"
+ 
+
 import { db } from "../libs/db"
 
+export const createProblem = async (req, res)=>{
+    
+}
 
 export const getAllProblems = async (req,res)=>{
     try {
@@ -52,3 +57,14 @@ export const getAllProblemById= async (req, res)=>{
         })
     }
 }
+
+export const updateProblem = async(req, res)=>{
+    //id
+    //id --> problem(condtion)
+    //baki kaam same as create
+}
+
+export const deleteProblem =async (req, res)=>{}
+
+export const getAllProblemsSolvedByUser  = async ( req, res)=>{}
+
