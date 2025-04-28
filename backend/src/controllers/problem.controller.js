@@ -4,6 +4,9 @@ import express from "express"
 import { db } from "../libs/db"
 
 export const createProblem = async (req, res)=>{
+    // going to get all the data from the request
+    // going to check the user role once again admin or user
+    // loop through each refrence solution for diffrent lanaguage
     
 }
 
