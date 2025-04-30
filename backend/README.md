@@ -50,7 +50,8 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
          checkAdmin : created
          controller
            - src-> controllers-> problem.controller.js
-             - creeateProblem() --> judge0.libs.js
+             - creeateProblem() --> judge0.libs.js [getJudge0LanguageId]
+                                --? judge0.libs.js [submitBatch]
 
      
 

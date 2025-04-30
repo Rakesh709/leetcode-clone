@@ -5,6 +5,10 @@ export const  getJudge0LanguageId = (Language)=>{
         "JAVASCRIPT":63,
     }
 
-    return  languageMap[Language.toUpperCase];
+    return  languageMap[Language.toUpperCase()];
 }
 
+//jo judge0 kai end point hai usko hit krega
+export const submitBatch = async (submissions)=>{
+
+}
