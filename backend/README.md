@@ -51,7 +51,9 @@ POSTGRES_PASSWORD=mypassword -p 5432:5432 -d postgres
          controller
            - src-> controllers-> problem.controller.js
              - creeateProblem() --> judge0.libs.js [getJudge0LanguageId]
-                                --? judge0.libs.js [submitBatch]
+                                --> judge0.libs.js [submitBatch]
+                                --> judge0.libs.js [pollBatchResults]
+
 
      
 
