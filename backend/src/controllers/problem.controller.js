@@ -1,11 +1,11 @@
 import express from "express";
 
-import { db } from "../libs/db";
+import { db } from "../libs/db.js";
 import {
   getJudge0LanguageId,
   pollBatchResults,
   submitBatch,
-} from "../libs/judge0.lib";
+} from "../libs/judge0.lib.js";
 
 export const createProblem = async (req, res) => {
   // going to get all the data from the request
@@ -57,7 +57,9 @@ export const createProblem = async (req, res) => {
       const results = await pollBatchResults(tokens);
 
       for (let i = 0; i < results.length; i++) {
+        
         const result = results[i];
+        console.log("Result----",result);
 
         if (result.status.id !== 3) {
           return res.status(400).json({
@@ -83,11 +85,15 @@ export const createProblem = async (req, res) => {
         },
       });
 
-      return res.status(201).json(newProblem)
+      return res.status(201).json({
+        success:true,
+        message:"Message Created Successfully",
+        problem:newProblem
+      })
     }
   } catch (error) {
     console.log("Failed to create Problem");
-    res.status(400).json({
+    res.status(500).json({
         error:"Error while creating problem"
     })
     
