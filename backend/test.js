@@ -7,7 +7,7 @@ const data = `{
         "operators",
         "addition"
     ],
-    "examples": {
+    "example": {
         "PYTHON": {
             "input": "3 7",
             "output": "10",
@@ -20,7 +20,7 @@ const data = `{
         }
     },
     "constraints": "-10^9 ≤ a, b ≤ 10^9",
-    "testcases": [
+    "testCases": [
         {
             "input": "100 200",
             "output": "300"
@@ -52,6 +52,10 @@ const data = `{
 
 `const fs = require('fs');\n\nfunction addTwoNumbers(a, b) {\n    // Write your code here\n    // Return the sum of a and b\n    return a + b;\n}\n\n// Reading input from stdin (using fs to read all input)\nconst input = fs.readFileSync(0, 'utf-8').trim();\nconst [a, b] = input.split(' ').map(Number);\n\nconsole.log(addTwoNumbers(a, b))`
 
-function addTwoNumber(a,b){
-    //write your code here
-}
+// function addTwoNumber(a,b){
+//     //write your code here
+// }
+
+
+
+

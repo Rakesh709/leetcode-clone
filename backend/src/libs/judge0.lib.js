@@ -11,18 +11,7 @@ export const  getJudge0LanguageId = (Language)=>{
     return  languageMap[Language.toUpperCase()];
 }
 
-//jo judge0 kai end point hai usko hit krega
-export const submitBatch = async (submissions)=>{
-    const {data} = await axios.post(`${process.env.JUDGE0_API_URL}/submissions/batch?base64_encoded=true`,{
-        submissions
-    })
 
-    console.log("submission results:", data);
-
-    return data //[{token},{token},{token}]
-    
-
-}
 
 //jab bhi pehle bar hit krtte hait o do baat hit krte hai 
 //1. we will get the token 
@@ -33,7 +22,7 @@ const sleep = (ms)=> new Promise((resolve)=> setTimeout(resolve,ms))
 
 export const pollBatchResults = async (tokens) =>{
     while(true){
-        const {data}= await axios.get(`{process.env.JUDGE0_API_URL}/submissions/batch`,{
+        const {data}= await axios.get(`${process.env.JUDGE0_API_URL}/submissions/batch`,{
             params:{
                 tokens:tokens.join(","),
                 base64_encoded:true,
@@ -52,3 +41,17 @@ export const pollBatchResults = async (tokens) =>{
 }
 
 //polling : kisi end point ko baar baar puch rhe ho ho gya kya 
+
+
+//jo judge0 kai end point hai usko hit krega
+export const submitBatch = async (submissions)=>{
+    const {data} = await axios.post(`${process.env.JUDGE0_API_URL}/submissions/batch?base64_encoded=true`,{
+        submissions
+    })
+
+    console.log("submission results:", data);
+
+    return data //[{token},{token},{token}]
+    
+
+}

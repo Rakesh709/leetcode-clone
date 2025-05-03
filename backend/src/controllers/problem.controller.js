@@ -57,9 +57,8 @@ export const createProblem = async (req, res) => {
       const results = await pollBatchResults(tokens);
 
       for (let i = 0; i < results.length; i++) {
-        
         const result = results[i];
-        console.log("Result----",result);
+        console.log("Result----", result);
 
         if (result.status.id !== 3) {
           return res.status(400).json({
@@ -67,36 +66,35 @@ export const createProblem = async (req, res) => {
           });
         }
       }
-
-      // save the problem tot he database;
-
-      const newProblem = await db.problem.create({
-        data: {
-          title,
-          description,
-          difficulty,
-          tags,
-          example,
-          constraints,
-          testCases,
-          codeSnippets,
-          referenceSolutions,
-          userId:req.user.id
-        },
-      });
-
-      return res.status(201).json({
-        success:true,
-        message:"Message Created Successfully",
-        problem:newProblem
-      })
     }
+
+    // save the problem tot he database;
+
+    const newProblem = await db.problem.create({
+      data: {
+        title,
+        description,
+        difficulty,
+        tags,
+        example,
+        constraints,
+        testCases,
+        codeSnippets,
+        referenceSolutions,
+        userId: req.user.id,
+      },
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Message Created Successfully",
+      problem: newProblem,
+    });
   } catch (error) {
     console.log("Failed to create Problem");
     res.status(500).json({
-        error:"Error while creating problem"
-    })
-    
+      error: "Error while creating problem",
+    });
   }
 };
 
