@@ -1,3 +1,14 @@
+#Chapter 1 
+
+- npm init -y
+  "type": "module"
+  "dev":"nodemon src/index.js"
+-$ npm i -g nodemon
+-$ npm i express
+
+- src->index.js
+-$ npm i dotenv
+
 
 
 
