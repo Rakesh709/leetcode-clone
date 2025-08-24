@@ -30,41 +30,98 @@ export const register = async (req, res) => {
       },
     });
 
-    const token = jwt.sign({id: newUser.id},process.env.JWT_SECRETE,{
-        expiresIn: "7d",
-      }
-    );
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRETE, {
+      expiresIn: "7d",
+    });
 
-    res.cookie("jwt",token,{
-        httpOnly:true,
-        sameSite:"strict",
-        secure:process.env.NODE_ENV !=="development",
-        maxAge: 1000*60*60*24*7
-    })
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV !== "development",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
 
     res.status(201).json({
-        message:"User Created Successfully",
-        user:{
-            id:newUser.id,
-            email:newUser.email,
-            name:newUser.name,
-            role: newUser.role,
-            image:newUser.image
-        }
-    })
+      message: "User Created Successfully",
+      user: {
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name,
+        role: newUser.role,
+        image: newUser.image,
+      },
+    });
   } catch (error) {
     console.log("Error creating user");
     res.status(500).json({
-        error:"Error Creating user"
-    })
-    
+      error: "Error Creating user",
+    });
   }
 };
 
-export const login = async (req, res) => {
-  
-};
+export const login = async (req, res) =>{
+    const {email, password} = req.body;
 
-export const logout = async (req, res) => {};
+    try {
+        const user =await db.user.findUnique({
+            where:{
+                email
+            }
+        })
+
+        if(!user){
+            return res.status(401).json({
+                error:"User not found"
+            })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+
+        if(!isMatch){
+            return res.status(401).json({
+                error:"Invalid credentials"
+            })
+        }
+
+        const token = jwt.sign({id:user.id},process.env.JWT_SECRET,{
+            expiresIn:"7d"
+        })
+
+        res.cookie("jwt",token,{
+            httpOnly:true,
+            sameSite:"strict",
+            secure:process.env.NODE_ENV !=="production",
+            maxAge:1000*60*60*24*7 //days
+
+        })
+
+        res.status(200).json({
+            success:true,
+            message:"User Logged in successfully",
+            user:{
+                id:user.id,
+                email:user.email,
+                name:user.name,
+                role:user.role,
+                image:user.image
+            }
+        })
+    } catch (error) {
+        console.error("Error Logging user:", error)
+        res.status(500).json({
+            error:"Error Logging user"
+        })
+    }
+}
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("jwt",{
+      
+    })
+  } catch (error) {
+    
+  }
+};
 
 export const check = async (req, res) => {};
