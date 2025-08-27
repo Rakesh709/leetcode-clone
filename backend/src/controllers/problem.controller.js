@@ -100,7 +100,30 @@ export const createProblem = async (req, res) => {
     }
 };
 
-export const getAllProblems = async (req, res) => { }
+export const getAllProblems = async (req, res) => { 
+    try {
+        const problems = await db.problem.findMany();
+
+        if(!problems){
+            return res.status(404).json({
+                error:"No Problem found"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Messaged fetched Successfully",
+            problem: newProblem,
+        })
+    } catch (error) {
+        console.log("Failed to fetched Problem");
+         console.error("Failed to fetched Problem:", error);
+        res.status(500).json({
+            error: "Error while fetched problem",
+            error: error.message || "Error while fetched problem",
+        });
+    }
+}
 
 export const getAllProblemById = async (req, res) => { };
 
