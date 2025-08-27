@@ -22,7 +22,7 @@ export const authMiddleware  = async (req,res,next) => {
             })
         }
 
-        const user = db.user.findUnique({
+        const user =await db.user.findUnique({
             where:{
                 id:decoded.id
             },
