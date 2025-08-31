@@ -75,9 +75,9 @@ model Submission {
   stdin          String?
   stdout         String?
   stderr         String?
-  compiledOutput String?
+  compileOutput String?
   status         String // accepted wrong answer
-  memmory        String?
+  memory        String?
   time           String?
 
   createdAt DateTime @default(now())

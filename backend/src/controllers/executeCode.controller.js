@@ -85,7 +85,7 @@ export const executeCode = async (req,res) =>{
                 sourceCode: source_code,
                 language:getLanguageName(language_id),
                 stdin:stdin.join("\n"),
-                stdout:JSON.stringify(detailedResults.map((r) => e.stdout)),
+                stdout:JSON.stringify(detailedResults.map((r) => r.stdout)),
                 stderr:detailedResults.some((r)=>r.stderr)
                 ? JSON.stringify(detailedResults.map((r)=>r.stderr))
                 :null,
@@ -102,7 +102,8 @@ export const executeCode = async (req,res) =>{
 
             },
         });
-
+        
+        
         // if all passed = true mark problem as solved for the current user
         if(allPassed){
             await db.problemSolved.upsert({
@@ -118,18 +119,47 @@ export const executeCode = async (req,res) =>{
             })
         }
 
-        
+        //8. save individual test cases results using detailed 
+        const testCaseResults = detailedResults.map((result)=>({
+            submissionId:submission.id,
+            testCase:result.testCase,
+            passed:result.passed,
+            stdout:result.stdout,
+            expected:result.expected,
+            stderr:result.stderr,
+            compileOutput:result.compile_output,
+            status:result.status,
+            memory: result.memory,
+            time:result.time
+        }))
+
+        await db.testCaseResult.createMany({
+            data:testCaseResults
+        })
+
+        //core bussiness logic 
+        const submissionWithTestCase = await db.submission.findUnique({
+            where:{
+                id:submission.id,
+            },
+            include:{
+                testCases:true,
+            }
+        })
+
 
         res.status(200).json({
-            message:"Code executed !"
+            success:true,
+            message:"Code Executed Successfully !",
+            submission:submissionWithTestCase
+
         })
         
         
 
 
     } catch (error) {
-        res.status(500).json({
-            message:"Failed code execution"
-        })
+        console.error("Error execution code:", error.message);
+        res.status(500).json({error:"Failed to execute code"})
     }
 }

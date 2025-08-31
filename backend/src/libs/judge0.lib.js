@@ -22,7 +22,7 @@ export const pollBatchResults = async (tokens) =>{
         const {data}= await axios.get(`${process.env.JUDGE0_API_URL}/submissions/batch`,{
             params:{
                 tokens:tokens.join(","),
-                base64_encoded:true,
+                base64_encoded:false,
             }
         })
 
