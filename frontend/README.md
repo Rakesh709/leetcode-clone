@@ -18,3 +18,9 @@ If you are developing a production application, we recommend using TypeScript wi
    - npm i react-router-dom
    - main.jsx import it
    - 
+   - npm i react-hook-form
+      - signuppage
+   - npm install @hookform/resolvers
+   - npm i zod
+   - npm install lucide-react
+   
