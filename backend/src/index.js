@@ -6,12 +6,18 @@ import problemRoutes from "./routes/problem.routes.js";
 import executionRoute from "./routes/executeCode.routes.js";
 import submissionRoutes from "./routes/submissionRoutes.routes.js";
 import playlistRoutes from "./routes/playlist.routes.js";
-
+import cors from "cors";
 
 
 const app = express();
 dotenv.config();
 app.use(express.json());
+app.use(
+    cors({
+        origin:"http://localhost:5174",
+        credentials:true
+    })
+)
 
 app.use(cookieParser());
 const port = 8000 || process.env.PORT

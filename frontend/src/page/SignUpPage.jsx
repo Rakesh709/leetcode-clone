@@ -11,7 +11,7 @@ import {
     Lock,
     Mail,
 } from "lucide-react";
-
+import {useAuthStore} from "../store/useAuthStore.js"
 
 
 import { z } from "zod";
@@ -26,7 +26,8 @@ const SignUpSchema = z.object({
 
 const SignUpPage = () => {
 
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+    const {signup , isSigninUp} = useAuthStore()
     const {
         register,
         handleSubmit,
@@ -36,7 +37,13 @@ const SignUpPage = () => {
     })
 
     const onSubmit = async (data) => {
-        console.log(data);
+        try {
+            await signup(data)
+            console.log("Signup data",data);
+            
+        } catch (error) {
+            console.error("Failed in signin",error)
+        }
 
     }
 
@@ -141,17 +148,17 @@ const SignUpPage = () => {
                         <button
                             type="submit"
                             className="btn btn-primary w-full"
-                        // disabled={isSigninUp}
+                         disabled={isSigninUp}
                         >
-                            {/* {isSigninUp ? (
+                            {isSigninUp ? (
                                 <>
                                     <Loader2 className="h-5 w-5 animate-spin" />
                                     Loading...
                                 </>
                             ) : (
                                 "Sign in"
-                            )} */}
-                            Sign up
+                            )}
+                            
                         </button>
                     </form>
 
