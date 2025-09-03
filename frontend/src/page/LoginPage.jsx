@@ -125,7 +125,7 @@ const LoginPage = () => {
                             className="btn btn-primary w-full"
                             disabled={isLoggingIn}
                         >
-                            {isSigninUp ? (
+                            {isLoggingIn ? (
                                 <>
                                     <Loader2 className="h-5 w-5 animate-spin" />
                                     Loading...
@@ -141,9 +141,9 @@ const LoginPage = () => {
                     {/* Footer */}
                     <div className="text-center">
                         <p className="text-base-content/60">
-                            Already have an account?{" "}
-                            <Link to="/login" className="link link-primary">
-                                Sign in
+                            Don't have an account?{" "}
+                            <Link to="/signup" className="link link-primary">
+                                Sign up
                             </Link>
                         </p>
                     </div>
