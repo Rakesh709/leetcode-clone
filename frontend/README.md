@@ -1,15 +1,13 @@
-# React + Vite
+🌟 About the Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a LeetLab - A Leetcode Inspired Product designed to help developers practice coding challenges in multiple programming languages (JavaScript, Python, Java). The platform includes features such as:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Dynamic Code Editor: Powered by Monaco Editor, allowing users to write and test code in real-time.
+Problem Descriptions: Detailed problem descriptions, examples, constraints, and hints.
+Test Cases: Predefined test cases for each problem to validate solutions.
+Multi-Language Support: Write solutions in JavaScript, Python, or Java.
+Submission Tracking: View submission history, memory usage, runtime, and status (Accepted, Wrong Answer, etc.).
+Responsive Design: Built with modern UI/UX principles for a seamless experience on all devices.
 
 
 # step the app
@@ -23,4 +21,4 @@ If you are developing a production application, we recommend using TypeScript wi
    - npm install @hookform/resolvers
    - npm i zod
    - npm install lucide-react
-   
+
