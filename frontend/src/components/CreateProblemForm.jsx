@@ -318,6 +318,7 @@ const CreateProblemForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async (value) => {
+        // console.log("submit sai pehle")
         try {
             setIsLoading(true)
             const res = await axiosInstance.post("/problems/create-problem", value)
@@ -326,6 +327,7 @@ const CreateProblemForm = () => {
             navigation("/");
 
         } catch (error) {
+            console.log("try block kai error")
             console.log(error);
             toast.error("Error creating problem")
         }
