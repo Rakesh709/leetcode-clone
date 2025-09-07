@@ -47,6 +47,16 @@ const ProblemTable = ({ problems }) => {
     );
   }, [filteredProblems, currentPage]);
 
+
+  const handleCreatePlaylist = async (data) => {
+    await createPlaylist(data);
+  };
+
+  const handleAddToPlaylist = (problemId) => {
+    setSelectedProblemId(problemId);
+    setIsAddToPlaylistModalOpen(true);
+  };
+
   return (
       <div className="w-full max-w-6xl mx-auto mt-10">
       {/* Header with Create Playlist Button */}
@@ -159,7 +169,7 @@ const ProblemTable = ({ problems }) => {
                         {authUser?.role === "ADMIN" && (
                           <div className="flex gap-2">
                             <button
-                              onClick={() => {}}
+                              onClick={() => handleDelete(problem.id)}
                               className="btn btn-sm btn-error"
                             >
                               <TrashIcon className="w-4 h-4 text-white" />
@@ -171,7 +181,7 @@ const ProblemTable = ({ problems }) => {
                         )}
                         <button
                           className="btn btn-sm btn-outline flex gap-2 items-center"
-                          onClick={() => {}}
+                          onClick={() => handleAddToPlaylist(problem.id)}
                         >
                           <Bookmark className="w-4 h-4" />
                           <span className="hidden sm:inline">Save to Playlist</span>
@@ -193,7 +203,7 @@ const ProblemTable = ({ problems }) => {
       </div>
 
       {/* Pagination */}
-      {/* <div className="flex justify-center mt-6 gap-2">
+      <div className="flex justify-center mt-6 gap-2">
         <button
           className="btn btn-sm"
           disabled={currentPage === 1}
@@ -211,7 +221,7 @@ const ProblemTable = ({ problems }) => {
         >
           Next
         </button>
-      </div> */}
+      </div>
 
       {/* Modals */}
       {/* <CreatePlaylistModal
