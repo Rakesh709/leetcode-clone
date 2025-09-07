@@ -159,7 +159,7 @@ const ProblemTable = ({ problems }) => {
                         {authUser?.role === "ADMIN" && (
                           <div className="flex gap-2">
                             <button
-                              onClick={() => handleDelete(problem.id)}
+                              onClick={() => {}}
                               className="btn btn-sm btn-error"
                             >
                               <TrashIcon className="w-4 h-4 text-white" />
@@ -171,7 +171,7 @@ const ProblemTable = ({ problems }) => {
                         )}
                         <button
                           className="btn btn-sm btn-outline flex gap-2 items-center"
-                          onClick={() => handleAddToPlaylist(problem.id)}
+                          onClick={() => {}}
                         >
                           <Bookmark className="w-4 h-4" />
                           <span className="hidden sm:inline">Save to Playlist</span>
