@@ -20,27 +20,31 @@ import {
 } from "lucide-react";
 
 import { Link, useParams } from "react-router-dom";
-import { useProblemStore } from "../store/useProblemStore";
+import { useProblemStore } from "../store/useProblemStore.js";
 
-import { getLanguageId } from "../libs/utils";
-import { useExecutionStore } from "../store/useExecution";
-import { useSubmissionStore } from "../store/useSubmissionStore";
-import Submission from "../components/Submission";
-import SubmissionsList from "../components/SubmissionList";
+
+// import { useExecutionStore } from "../store/useExecution";
+// import { useSubmissionStore } from "../store/useSubmissionStore";
+// import Submission from "../components/Submission";
+// import SubmissionsList from "../components/SubmissionList";
 
 const ProblemPage = () => {
-    const {id} = useParams();
+  const { id } = useParams();
+  console.log(id);
+  
 
-    const { getProblemById, problem, isProblemLoading } = useProblemStore();
+  const { getProblemById, problem, isProblemLoading } = useProblemStore();
 
-    useEffect(() => {
+  useEffect(() => {
     getProblemById(id);
-    
 
-    }, [id]);
+  }, [id]);
+
+  // console.log(problem);
+
   return (
     <div>
-    Hello  {JSON.stringify(pro)}
+      Hello  {JSON.stringify(problem)}
     </div>
   )
 }
