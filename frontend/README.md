@@ -52,4 +52,4 @@ Database: PostgreSQL (or Prisma ORM)
 Authentication: JWT (JSON Web Tokens)
 Code Execution: Judge0 API (for running and validating code submissions)
 State Management: Zustand (React state management library)
-Version Control: Git, GitHub
+Version Control: Git, GitHub 
