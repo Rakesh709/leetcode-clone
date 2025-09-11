@@ -45,7 +45,8 @@ View execution results, including runtime, memory usage, and error messages.
 Secure login and registration for tracking user progress and submissions.
 6. Admin Panel
 Admins can add new problems, manage submissions.
-🛠️ Tech Stack
+
+#🛠️ Tech Stack
 Frontend: React.js, Tailwind CSS, Monaco Editor
 Backend: Node.js, Express.js
 Database: PostgreSQL (or Prisma ORM)
