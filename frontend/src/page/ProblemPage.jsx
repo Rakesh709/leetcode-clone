@@ -21,6 +21,7 @@ import { Link, useParams } from "react-router-dom";
 import { useProblemStore } from "../store/useProblemStore";
 import { getLanguageId } from "../libs/lang";
 import { useExecutionStore } from "../store/useExecutionStore";
+import Submission from "../components/Submission";
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -336,8 +337,9 @@ const ProblemPage = () => {
           <div className="card-body">
             {submission ? (
               <div className="p-4 bg-base-200 rounded-xl">
-                <p className="font-semibold text-success">Code executed!</p>
-                <pre className="mt-2">{JSON.stringify(submission, null, 2)}</pre>
+                {/* <p className="font-semibold text-success">Code executed!</p>
+                <pre className="mt-2">{JSON.stringify(submission, null, 2)}</pre> */}
+                <Submission submission={submission}/>
                 
               </div>
               
