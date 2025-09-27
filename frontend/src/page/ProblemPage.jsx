@@ -23,6 +23,8 @@ import { getLanguageId } from "../libs/lang";
 import { useExecutionStore } from "../store/useExecutionStore";
 import Submission from "../components/Submission.jsx";
 
+import {useSubmission} from "../store/useSubmissionStore.js"
+
 const ProblemPage = () => {
   const { id } = useParams();
 
@@ -31,6 +33,15 @@ const ProblemPage = () => {
 
   // 🟢 Execution store
   const { executeCode, submission, isExecuting } = useExecutionStore();
+
+  const {
+    submission: submissions,
+    isLoading: isSubmissionsLoading,
+    getSubmissionForProblem,
+    getSubmissionCountForProblem,
+    submissionCount,
+  } = useSubmission();
+
 
   // Local state
   const [code, setCode] = useState("");
@@ -42,6 +53,7 @@ const ProblemPage = () => {
   // Fetch problem
   useEffect(() => {
     getProblemById(id);
+    getSubmissionCountForProblem(id)
   }, [id]);
 
   // Set code + testcases when problem changes
@@ -201,9 +213,9 @@ const ProblemPage = () => {
                   day: "numeric",
                 })}
               </span>
-              <span className="text-base-content/30">•</span>
+              {/* <span className="text-base-content/30"></span> */}
               <Users className="w-4 h-4" />
-              <span>Coming soon</span>
+               <span>{submissionCount} Submissions</span>
               <span className="text-base-content/30">•</span>
               <ThumbsUp className="w-4 h-4" />
               <span>Success Rate TBD</span>

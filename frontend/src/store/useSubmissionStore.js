@@ -13,7 +13,7 @@ export const useSubmission = create((set,get) => ({
     getAllSubmissions: async() => {
         try {
             set({isLoading:true})
-            const res = await axiosInstance.get("/submissions/get-all-submissions")
+            const res = await axiosInstance.get("/submission/get-all-submissions")
             set({submissions:res.data.submissions})
             toast.success(res.data.message)
         } catch (error) {
@@ -28,7 +28,7 @@ export const useSubmission = create((set,get) => ({
     getSubmissionForProblem: async (problemId) => {
         
         try {
-           const res= await axiosInstance.get(`/submissions/get-submissions/${problemId}`)
+           const res= await axiosInstance.get(`/submission/get-submissions/${problemId}`)
 
             set({submission:res.data.submission}) 
         } catch (error) {
@@ -38,9 +38,9 @@ export const useSubmission = create((set,get) => ({
         }
     },
 
-    getSubmissionCountForProblem : async(problemId)=>{
+    getSubmissionCountForProblem : async (problemId) => {
         try {
-            const res = await axiosInstance.get(`/submissions/get-submissions-count/${problemId}`)
+            const res = await axiosInstance.get(`/submission/get-submission-count/${problemId}`)
             set({ submissionCount: res.data.count });
         } catch (error) {
             console.log("Error getting submission count for problem", error);
