@@ -21,7 +21,7 @@ import { Link, useParams } from "react-router-dom";
 import { useProblemStore } from "../store/useProblemStore";
 import { getLanguageId } from "../libs/lang";
 import { useExecutionStore } from "../store/useExecutionStore";
-import Submission from "../components/Submission";
+import Submission from "../components/Submission.jsx";
 
 const ProblemPage = () => {
   const { id } = useParams();
