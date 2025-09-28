@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
-import { Bookmark, PencilIcon, Trash, TrashIcon, Plus } from "lucide-react";
+import { Bookmark, PencilIcon, Trash, TrashIcon, Plus, Loader2 } from "lucide-react";
+import { useActions } from "../store/useAction";
 
 
 const ProblemTable = ({ problems }) => {
@@ -11,6 +12,7 @@ const ProblemTable = ({ problems }) => {
   const [selectedTag, setSelectedTag] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
 
+  const {isDeletingProblem,onDeleteProblem} = useActions();
   // Extract all unique tags from problems
   const allTags = useMemo(() => {
     if (!Array.isArray(problems)) return [];
@@ -46,6 +48,11 @@ const ProblemTable = ({ problems }) => {
       currentPage * itemsPerPage
     );
   }, [filteredProblems, currentPage]);
+
+
+  const handleDelete = (id) => {
+    onDeleteProblem(id)
+  };
 
 
   const handleCreatePlaylist = async (data) => {
@@ -172,7 +179,9 @@ const ProblemTable = ({ problems }) => {
                               onClick={() => handleDelete(problem.id)}
                               className="btn btn-sm btn-error"
                             >
-                              <TrashIcon className="w-4 h-4 text-white" />
+                            {isDeletingProblem ?<Loader2 className="animate-spin h-4 w-4"/> : <TrashIcon className="w-4 h-4 text-white" />
+                            }
+                              
                             </button>
                             <button disabled className="btn btn-sm btn-warning">
                               <PencilIcon className="w-4 h-4 text-white" />
