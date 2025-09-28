@@ -3,7 +3,8 @@ import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 import { Bookmark, PencilIcon, Trash, TrashIcon, Plus, Loader2 } from "lucide-react";
 import { useActions } from "../store/useAction";
-
+import {usePlaylistStore} from "../store/usePlaylistStore"
+import CreatePlaylistModal from "./CreatePlaylistModal";
 
 const ProblemTable = ({ problems }) => {
   const { authUser } = useAuthStore();
@@ -13,6 +14,11 @@ const ProblemTable = ({ problems }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const {isDeletingProblem,onDeleteProblem} = useActions();
+
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] = useState(false);
+
+  const {createPlaylist} = usePlaylistStore();
   // Extract all unique tags from problems
   const allTags = useMemo(() => {
     if (!Array.isArray(problems)) return [];
@@ -71,7 +77,7 @@ const ProblemTable = ({ problems }) => {
         <h2 className="text-2xl font-bold">Problems</h2>
         <button
           className="btn btn-primary gap-2"
-          onClick={() => {}}
+          onClick={() => setIsCreateModalOpen(true)}
         >
           <Plus className="w-4 h-4" />
           Create Playlist
@@ -233,11 +239,11 @@ const ProblemTable = ({ problems }) => {
       </div>
 
       {/* Modals */}
-      {/* <CreatePlaylistModal
+      <CreatePlaylistModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onSubmit={handleCreatePlaylist}
-      /> */}
+      />
       
       {/* <AddToPlaylistModal
         isOpen={isAddToPlaylistModalOpen}
