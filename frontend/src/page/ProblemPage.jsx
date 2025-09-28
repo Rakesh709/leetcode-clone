@@ -24,6 +24,7 @@ import { useExecutionStore } from "../store/useExecutionStore";
 import Submission from "../components/Submission.jsx";
 
 import {useSubmission} from "../store/useSubmissionStore.js"
+import SubmissionList from "../components/SubmissionList.jsx";
 
 const ProblemPage = () => {
   const { id } = useParams();
@@ -53,7 +54,7 @@ const ProblemPage = () => {
   // Fetch problem
   useEffect(() => {
     getProblemById(id);
-    getSubmissionCountForProblem(id)
+    getSubmissionCountForProblem(id);
   }, [id]);
 
   // Set code + testcases when problem changes
@@ -68,6 +69,15 @@ const ProblemPage = () => {
       );
     }
   }, [problem, selectedLanguage]);
+
+  useEffect(()=>{
+    if(activeTab ==="submissions" && id){
+      getSubmissionForProblem(id)
+    }
+  },[activeTab,id])
+
+  console.log("submission count wala", submissions);
+  
 
   // Change language
   const handleLanguageChange = (e) => {
@@ -112,7 +122,7 @@ const ProblemPage = () => {
             {problem.examples && (
               <>
                 <h3 className="text-xl font-bold mb-4">Examples:</h3>
-                {Object.entries(problem.examples).map(([lang, example]) => (
+                {Object.entries(problem.examples).map(([lang, example],idx) => (
                   <div
                     key={lang}
                     className="bg-base-200 p-6 rounded-xl mb-6 font-mono"
@@ -161,9 +171,7 @@ const ProblemPage = () => {
         );
       case "submissions":
         return (
-          <div className="p-4 text-center text-base-content/70">
-            Submissions feature coming soon 🚀
-          </div>
+          <SubmissionList submissions={submissions} isLoading={isSubmissionsLoading}/>
         );
       case "discussion":
         return (
@@ -213,7 +221,7 @@ const ProblemPage = () => {
                   day: "numeric",
                 })}
               </span>
-              {/* <span className="text-base-content/30"></span> */}
+              <span className="text-base-content/30">•</span>
               <Users className="w-4 h-4" />
                <span>{submissionCount} Submissions</span>
               <span className="text-base-content/30">•</span>

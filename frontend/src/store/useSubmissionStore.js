@@ -28,9 +28,9 @@ export const useSubmission = create((set,get) => ({
     getSubmissionForProblem: async (problemId) => {
         
         try {
-           const res= await axiosInstance.get(`/submission/get-submissions/${problemId}`)
+           const res= await axiosInstance.get(`/submission/get-submission/${problemId}`)
 
-            set({submission:res.data.submission}) 
+            set({submission:res.data.submissions}) 
         } catch (error) {
             console.log("Error getting submissions for problem", error);
 
