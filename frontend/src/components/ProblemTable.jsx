@@ -5,6 +5,7 @@ import { Bookmark, PencilIcon, Trash, TrashIcon, Plus, Loader2 } from "lucide-re
 import { useActions } from "../store/useAction";
 import {usePlaylistStore} from "../store/usePlaylistStore"
 import CreatePlaylistModal from "./CreatePlaylistModal";
+import AddToPlaylistModal from "./AddToPlaylist";
 
 const ProblemTable = ({ problems }) => {
   const { authUser } = useAuthStore();
@@ -17,6 +18,8 @@ const ProblemTable = ({ problems }) => {
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] = useState(false);
+
+  const [selectedProblemId, setSelectedProblemId] = useState(null);
 
   const {createPlaylist} = usePlaylistStore();
   // Extract all unique tags from problems
@@ -245,11 +248,11 @@ const ProblemTable = ({ problems }) => {
         onSubmit={handleCreatePlaylist}
       />
       
-      {/* <AddToPlaylistModal
+      <AddToPlaylistModal
         isOpen={isAddToPlaylistModalOpen}
         onClose={() => setIsAddToPlaylistModalOpen(false)}
         problemId={selectedProblemId}
-      /> */}
+      />
     </div>
     
   )

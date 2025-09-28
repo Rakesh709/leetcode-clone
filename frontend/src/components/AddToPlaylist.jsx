@@ -1,18 +1,26 @@
-import React from 'react'
-import {useForm} from "react-hook-form";
-import {X} from "lucide-react"
+import React, { useEffect, useState } from 'react';
+import { X, Plus, Loader } from 'lucide-react';
+import { usePlaylistStore } from '../store/usePlaylistStore';
 
-const AddToPlaylist = ({isOpen,onClose,onSubmit}) => {
-    const {register,handleSubmit,formState:{errors},reset} = useForm();
+const AddToPlaylistModal = ({ isOpen, onClose, problemId }) => {
+  const { playlists, getAllPlaylists, addProblemToPlaylist, isLoading } = usePlaylistStore();
+  const [selectedPlaylist, setSelectedPlaylist] = useState('');
 
-    const handleFormSubmit = async (data) => {
-        await onSubmit(data);
-        reset()
-        onClose()
+  useEffect(() => {
+    if (isOpen) {
+      getAllPlaylists();
     }
+  }, [isOpen]);
 
-    if(!isOpen) return null;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedPlaylist) return;
 
+    await addProblemToPlaylist(selectedPlaylist, [problemId]);
+    onClose();
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -60,7 +68,7 @@ const AddToPlaylist = ({isOpen,onClose,onSubmit}) => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddToPlaylist
+export default AddToPlaylistModal;
